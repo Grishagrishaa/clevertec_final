@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: clevertec_final
+  profiles:
+    active: dev
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  security:
+    user:
+      name: root
+      password: s3cr3t
+
+#springdoc:
+#  api-docs:
+#    path: /api-docs
+#    enabled: true
+
+app:
+  cache:
+    size: 30
+    type: LRU
