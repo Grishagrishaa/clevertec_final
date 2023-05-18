@@ -1,7 +1,6 @@
 package ru.clevertec.clevertec_final.integration;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;

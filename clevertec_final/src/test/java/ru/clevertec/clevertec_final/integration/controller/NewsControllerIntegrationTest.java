@@ -45,7 +45,7 @@ class NewsControllerIntegrationTest extends BaseIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-    @Value("app.test.token")
+    @Value("${app.test.token}")
     private String BEARER_TOKEN;
 
 

@@ -8,5 +8,5 @@ spring:
         git:
           uri: https://github.com/Grishagrishaa/config-repository.git
           username: Grishagrishaa
-          password: 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
+          password: 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
           default-label: "master"

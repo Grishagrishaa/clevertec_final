@@ -41,6 +41,12 @@ services:
     restart: always
     networks:
       - clevertec_ntwrk
+  config-service:
+    build: config-service
+    image: config-service:1.0.0
+    restart: always
+    networks:
+      - clevertec_ntwrk
   redis:
     image: redis
     ports:

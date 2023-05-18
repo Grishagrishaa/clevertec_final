@@ -1,7 +1,7 @@
 spring:
   cloud:
     config:
-      uri: http://root:s3cr3t@localhost:8888/
-      profile: dev
+      uri: http://root:s3cr3t@config-service:8888/
+      profile: prod
       label: master
       name: clevertec_final

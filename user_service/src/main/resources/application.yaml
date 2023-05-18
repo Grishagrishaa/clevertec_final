@@ -2,7 +2,7 @@ spring:
   application:
     name: user_service
   profiles:
-    active: dev
+    active: prod
   liquibase:
     default-schema: signed
     enabled: true
