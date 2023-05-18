@@ -1,0 +1,7 @@
+rootProject.name = 'clev_final'
+
+include 'clevertec_final'
+include 'my-logging-starter'
+include 'config-service'
+include 'user_service'
+

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: user_service
+  profiles:
+    active: dev
+  liquibase:
+    default-schema: signed
+    enabled: true
+    clear-checksums: true
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      uri: http://root:s3cr3t@localhost:8888/
+      profile: dev
+      label: master
+      name: user_service
