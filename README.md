@@ -21,7 +21,7 @@
 |      `DELETE`   | localhost/api/v1/news/{UUID}                                 | Delete news.                      |
 |      `PUT`      | localhost/api/v1/news/{UUID}                                 | Update news                       |
 |      `POST`     | localhost/api/v1/news                                        | Create news                       |
-|:---------------:|--------------------------------------------------------------|-----------------------------------|
+|-----------------|--------------------------------------------------------------|-----------------------------------|
 |      `GET`      | localhost/api/v1/comments/{uuid}                             | Get all comments                  |
 |      `GET`      | localhost/api/v1/comments/                                   | Get by UUID                       |
 |      `DELETE`   | localhost/api/v1/comments/{UUID}                             | Get all comments                  |
