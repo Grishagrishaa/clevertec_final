@@ -13,6 +13,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.clevertec.userservice.controller.filters.JwtFilter;
 import ru.clevertec.userservice.repository.entity.enums.ERole;
 
+/**
+ * Configuration class for security.
+ */
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -29,6 +32,14 @@ public class SecurityConfig {
         this.filter = filter;
     }
 
+
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http

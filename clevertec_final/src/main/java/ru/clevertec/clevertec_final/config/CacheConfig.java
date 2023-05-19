@@ -19,36 +19,71 @@ import java.time.Duration;
 import java.util.UUID;
 
 
+/**
+ * Configuration class for cache settings.
+ */
 @Configuration
 public class CacheConfig {
+
+    /**
+     * Size of the cache.
+     */
     @Value("${app.cache.size}")
     private Integer size;
+
+    /**
+     * Type of cache.
+     */
     @Value("#{'${app.cache.type}'.toUpperCase()}")
     private ECacheType cacheType;
 
+    /**
+     * Cache factory for creating caches.
+     */
     private final CacheFactory cacheFactory;
 
+    /**
+     * Constructs a new instance of CacheConfig.
+     *
+     * @param cacheFactory the cache factory
+     */
     public CacheConfig(CacheFactory cacheFactory) {
         this.cacheFactory = cacheFactory;
     }
 
+    /**
+     * Creates a cache for news items.
+     *
+     * @return the news cache
+     */
     @Bean
     @Profile("dev")
-    public Cache<UUID, NewsReadDto> newsCache(){
+    public Cache<UUID, NewsReadDto> newsCache() {
         return cacheFactory.getCache(size, cacheType);
     }
 
+    /**
+     * Creates a cache for comments.
+     *
+     * @return the comment cache
+     */
     @Bean
     @Profile("dev")
-    public Cache<UUID, CommentReadDto> commentCache(){
+    public Cache<UUID, CommentReadDto> commentCache() {
         return cacheFactory.getCache(size, cacheType);
     }
 
+    /**
+     * Creates a Redis cache manager for production profile.
+     *
+     * @param connectionFactory the Redis connection factory
+     * @return the Redis cache manager
+     */
     @Bean
     @Profile("prod")
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofSeconds(60)) // установка времени жизни записей в кеше
+                .entryTtl(Duration.ofSeconds(60))
                 .disableCachingNullValues();
 
         return RedisCacheManager.builder(connectionFactory)
@@ -56,6 +91,12 @@ public class CacheConfig {
                 .build();
     }
 
+    /**
+     * Creates a Redis template for production profile.
+     *
+     * @param connectionFactory the Redis connection factory
+     * @return the Redis template
+     */
     @Bean
     @Profile("prod")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
@@ -65,3 +106,4 @@ public class CacheConfig {
         return template;
     }
 }
+

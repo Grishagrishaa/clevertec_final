@@ -9,7 +9,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
+/**
+ * Implementation of the Cache interface using the Least Frequently Used (LFU) eviction policy.
+ *
+ * @param <K> the type of the cache keys
+ * @param <V> the type of the cache values
+ */
 public class CacheLFUImpl<K, V> implements Cache<K, V> {
+
     private final int size;
     private final Map<K, V> valueMap;
     private final Map<K, Long> countMap;
@@ -17,6 +24,11 @@ public class CacheLFUImpl<K, V> implements Cache<K, V> {
     private long unused = -1;
     private final ReentrantReadWriteLock lock;
 
+    /**
+     * Constructs a new CacheLFUImpl instance with the specified size.
+     *
+     * @param size the maximum size of the cache
+     */
     public CacheLFUImpl(int size) {
         this.size = size;
         this.valueMap = new ConcurrentHashMap<>();

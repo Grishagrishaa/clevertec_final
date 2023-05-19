@@ -32,6 +32,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
+
+/**
+ * Controller for managing comments.
+ */
 @RestController
 @RequestMapping("${app.commentController.path}")
 @RequiredArgsConstructor
@@ -40,31 +44,65 @@ public class CommentController {
 
     private final CommentService service;
 
+    /**
+     * Creates a new comment.
+     *
+     * @param createDto The DTO containing the comment data.
+     * @return The created comment as a response entity.
+     */
     @RequestMapping(method = POST)
     @SecurityRequirement(name = "api_key")
-    public ResponseEntity<CommentReadDto> create(@RequestBody CommentCreateDto createDto){
+    public ResponseEntity<CommentReadDto> create(@RequestBody CommentCreateDto createDto) {
         return ResponseEntity.status(CREATED).body(service.create(createDto));
     }
 
+    /**
+     * Retrieves a comment by its UUID.
+     *
+     * @param uuid The UUID of the comment.
+     * @return The retrieved comment as a response entity.
+     */
     @RequestMapping(method = GET, path = "/{uuid}")
-    public ResponseEntity<CommentReadDto> findById(@PathVariable UUID uuid){
+    public ResponseEntity<CommentReadDto> findById(@PathVariable UUID uuid) {
         return ResponseEntity.status(OK).body(service.findById(uuid));
     }
 
+    /**
+     * Retrieves comments based on the provided filter and pageable parameters.
+     *
+     * @param filter   The comment filter.
+     * @param pageable The pageable parameters.
+     * @return The paginated list of comments as a response entity.
+     */
     @RequestMapping(method = GET)
-    public ResponseEntity<Page<CommentReadDto>> findAllByCommentFilterPageable(@Valid CommentFilter filter, @PageableDefault Pageable pageable){
-        return ResponseEntity.status(OK).body(service.findAllByCommentFilterPageable(filter, pageable ));
+    public ResponseEntity<Page<CommentReadDto>> findAllByCommentFilterPageable(
+            @Valid CommentFilter filter, @PageableDefault Pageable pageable) {
+        return ResponseEntity.status(OK).body(service.findAllByCommentFilterPageable(filter, pageable));
     }
 
+    /**
+     * Updates a comment by its UUID.
+     *
+     * @param uuid      The UUID of the comment.
+     * @param createDto The DTO containing the updated comment data.
+     * @return The updated comment as a response entity.
+     */
     @RequestMapping(method = PUT, path = "/{uuid}")
     @SecurityRequirement(name = "api_key")
-    public ResponseEntity<CommentReadDto> updateById(@PathVariable UUID uuid, @RequestBody CommentCreateDto createDto){
+    public ResponseEntity<CommentReadDto> updateById(
+            @PathVariable UUID uuid, @RequestBody CommentCreateDto createDto) {
         return ResponseEntity.status(ACCEPTED).body(service.updateById(uuid, createDto));
     }
 
+    /**
+     * Deletes a comment by its UUID.
+     *
+     * @param uuid The UUID of the comment.
+     * @return The response entity indicating success or failure.
+     */
     @RequestMapping(method = DELETE, path = "/{uuid}")
     @SecurityRequirement(name = "api_key")
-    public ResponseEntity<?> deleteById(@PathVariable UUID uuid){
+    public ResponseEntity<?> deleteById(@PathVariable UUID uuid) {
         service.deleteById(uuid);
         return ResponseEntity.status(NO_CONTENT).build();
     }

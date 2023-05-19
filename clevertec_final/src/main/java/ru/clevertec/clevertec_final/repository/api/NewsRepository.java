@@ -7,6 +7,9 @@ import ru.clevertec.clevertec_final.repository.entity.News;
 
 import java.util.UUID;
 
+/**
+ * Repository interface for managing News entities.
+ */
 @Repository
 public interface NewsRepository extends JpaRepository<News, UUID>, JpaSpecificationExecutor<News> {
 

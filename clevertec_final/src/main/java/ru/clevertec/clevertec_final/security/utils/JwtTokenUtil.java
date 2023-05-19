@@ -5,15 +5,25 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Utility class for JWT token handling and validation.
+ */
+@Slf4j
 public class JwtTokenUtil {
-    private static final Logger log = LoggerFactory.getLogger(JwtTokenUtil.class);
 
     private static final String jwtSecret = "IwANTtObECOMEaDEVELOPERIwANTtObECOMEaDEVELOPERIW";
 
-
+    /**
+     * Validate a JWT token.
+     *
+     * @param token The JWT token to validate.
+     * @return True if the token is valid, false otherwise.
+     * @throws IllegalArgumentException if the token is invalid or expired.
+     */
     public static boolean validate(String token) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);

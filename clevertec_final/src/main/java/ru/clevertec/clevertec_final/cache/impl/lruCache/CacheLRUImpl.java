@@ -12,12 +12,23 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 
+/**
+ * Implementation of a Least Recently Used (LRU) cache using a Doubly Linked List and a HashMap.
+ *
+ * @param <K> the type of keys stored in the cache
+ * @param <V> the type of values stored in the cache
+ */
 public class CacheLRUImpl<K, V> implements Cache<K, V> {
     private final int size;
     private final Map<K, LinkedListNode<CacheElement<K, V>>> keyMap;
     private final DoublyLinkedList<CacheElement<K, V>> cacheElements;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
+    /**
+     * Constructs a new CacheLRUImpl with the specified size.
+     *
+     * @param size the maximum number of elements the cache can hold
+     */
     public CacheLRUImpl(int size) {
         this.size = size;
         this.keyMap = new ConcurrentHashMap<>(size);
@@ -82,6 +93,11 @@ public class CacheLRUImpl<K, V> implements Cache<K, V> {
         }
     }
 
+    /**
+     * Returns the current number of elements in the cache.
+     *
+     * @return the size of the cache
+     */
     public int size() {
         this.lock.readLock().lock();
         try {
@@ -91,10 +107,14 @@ public class CacheLRUImpl<K, V> implements Cache<K, V> {
         }
     }
 
+    /**
+     * Checks if the cache is empty.
+     *
+     * @return true if the cache is empty, false otherwise
+     */
     public boolean isEmpty() {
         return size() == 0;
     }
-
 
     private boolean evictElement() {
         this.lock.writeLock().lock();

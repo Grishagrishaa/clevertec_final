@@ -14,37 +14,45 @@ import java.util.UUID;
 
 @Validated
 public interface UserService extends UserDetailsService {
+
     /**
+     * Retrieves a user by their UUID.
      *
-     * @param uuid  user id
-     * @return one user
+     * @param uuid the UUID of the user
+     * @return the user with the specified UUID
      */
     User findById(UUID uuid);
 
     /**
+     * Retrieves a pageable list of users.
      *
-     * @param pageable - page parameters
-     * @return page of users
+     * @param pageable the pageable parameters
+     * @return a page of users
      */
     Page<User> findAllPageable(Pageable pageable);
 
     /**
-     * @param user user provided for saving in db
-     * @return
+     * Creates a new user.
+     *
+     * @param user the user to be created
+     * @return the created user
      */
     User createUser(@Valid UserCreateDto user);
 
     /**
-     * @param uuid       user id
-     * @param userDto    dto, provided with fields needed to update
-     * @return
+     * Updates a user identified by their UUID.
+     *
+     * @param uuid     the UUID of the user to be updated
+     * @param userDto  the DTO containing the fields to be updated
+     * @return the updated user
      */
     User updateByUuid(UUID uuid, @Valid UserCreateDto userDto);
 
     /**
+     * Loads a user by their username.
      *
-     * @param nick the username identifying the user whose data is required.
-     * @return  fully populated user record (never null)
+     * @param nick the username identifying the user
+     * @return the fully populated user record (never null)
      */
     UserDetails loadUserByUsername(String nick);
 }

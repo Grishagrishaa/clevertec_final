@@ -20,6 +20,10 @@ import java.util.List;
 import static org.apache.logging.log4j.util.Strings.isEmpty;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+
+/**
+ * Component for filtering and processing JWT authentication in a web application.
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -30,6 +34,15 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     @Override
+    /**
+     * Filters and processes the JWT authentication for each incoming request.
+     *
+     * @param request       The incoming HTTP request.
+     * @param response      The HTTP response.
+     * @param filterChain   The filter chain for invoking subsequent filters.
+     * @throws ServletException     If the filter encounters a servlet-related issue.
+     * @throws IOException          If an I/O error occurs during the filter execution.
+     */
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)

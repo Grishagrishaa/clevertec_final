@@ -11,6 +11,9 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 import java.util.UUID;
 
+/**
+ * Response containing the JWT after a successful login.
+ */
 @Data
 @Builder
 @NoArgsConstructor

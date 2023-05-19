@@ -11,11 +11,21 @@ import ru.clevertec.clevertec_final.service.RestService;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+/**
+ * Implementation of the RestService interface.
+ */
 @Service
 @RequiredArgsConstructor
 public class RestServiceImpl implements RestService {
     private final WebClient webClient;
 
+    /**
+     * Loads the user details by making a request to a remote service using WebClient.
+     *
+     * @param headerValue the header value to be included in the request
+     * @return the UserDetailsUser object representing the user details
+     * @throws UsernameNotFoundException if the user is not found or the token is invalid
+     */
     @Override
     public UserDetails loadUser(String headerValue) throws UsernameNotFoundException {
         UserDetailsUser user = null;
@@ -23,10 +33,11 @@ public class RestServiceImpl implements RestService {
             user = webClient
                     .get()
                     .header(AUTHORIZATION, headerValue)
-                    .retrieve().bodyToMono(UserDetailsUser.class).block();//ЕСЛИ ЗАПИСЬ НЕ НАЙДЕНА -> Ловим ошибку
-        }catch (WebClientResponseException e){
+                    .retrieve().bodyToMono(UserDetailsUser.class).block();
+        } catch (WebClientResponseException e) {
             throw new UsernameNotFoundException("USER NOT FOUND | INVALID TOKEN");
         }
         return user;
     }
 }
+

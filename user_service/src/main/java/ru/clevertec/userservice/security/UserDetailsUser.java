@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.UUID;
 
+/**
+ * Custom implementation of UserDetails interface for representing user details.
+ */
 @Getter
 @FieldNameConstants
 @Builder(setterPrefix = "set")

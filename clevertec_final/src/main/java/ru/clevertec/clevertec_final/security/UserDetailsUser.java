@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * Custom implementation of UserDetails interface for representing user details.
+ */
 @Builder
 @NoArgsConstructor @AllArgsConstructor
 public class UserDetailsUser implements UserDetails {

@@ -13,10 +13,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.clevertec.clevertec_final.controller.filters.JwtFilter;
 import ru.clevertec.clevertec_final.security.enums.ERole;
 
+/**
+ * Configuration class for security settings.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * JWT filter for authentication.
+     */
     private final JwtFilter filter;
     private static final String PUBLIC_ENDPOINTS = "/**";
     private static final String NEWS_ENDPOINTS = "/news/**";
@@ -29,6 +35,13 @@ public class SecurityConfig {
     }
 
     @Bean
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf().disable().cors().disable()

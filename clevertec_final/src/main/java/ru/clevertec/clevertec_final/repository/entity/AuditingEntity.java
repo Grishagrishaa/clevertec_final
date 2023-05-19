@@ -17,27 +17,40 @@ import jakarta.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.Instant;
 
-@Getter @Setter
-@MappedSuperclass
+/**
+ * Abstract base class for entities with auditing fields.
+ *
+ * @param <T> the type of the entity's identifier
+ */
+@Getter
+@Setter
 @SuperBuilder(setterPrefix = "set")
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
+@MappedSuperclass
 public abstract class AuditingEntity<T extends Serializable> implements BaseEntity<T> {
 
+    /**
+     * The date and time when the entity was created.
+     */
     @CreatedDate
     private Instant createdDate;
 
+    /**
+     * The date and time when the entity was last updated.
+     */
     @LastModifiedDate
     private Instant updatedDate;
 
     /**
-     * creator username
+     * The username of the creator.
      */
     @CreatedBy
     private String username;
 
     /**
-     * modifier username
+     * The username of the modifier.
      */
     @LastModifiedBy
     private String modifiedBy;
