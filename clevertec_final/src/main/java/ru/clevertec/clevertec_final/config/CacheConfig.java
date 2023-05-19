@@ -1,5 +1,6 @@
 package ru.clevertec.clevertec_final.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ import java.util.UUID;
  * Configuration class for cache settings.
  */
 @Configuration
+@RequiredArgsConstructor
 public class CacheConfig {
 
     /**
@@ -41,15 +43,6 @@ public class CacheConfig {
      * Cache factory for creating caches.
      */
     private final CacheFactory cacheFactory;
-
-    /**
-     * Constructs a new instance of CacheConfig.
-     *
-     * @param cacheFactory the cache factory
-     */
-    public CacheConfig(CacheFactory cacheFactory) {
-        this.cacheFactory = cacheFactory;
-    }
 
     /**
      * Creates a cache for news items.
